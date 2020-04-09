@@ -1,0 +1,305 @@
+em
+   Precision: 0.023
+   Recall:    0.156
+   Accuracy:  0.991
+
+el
+   Precision: 0.231
+   Recall:    0.509
+   Accuracy:  0.983
+
+aa
+   Precision: 0.497
+   Recall:    0.483
+   Accuracy:  0.979
+
+ch
+   Precision: 0.237
+   Recall:    0.405
+   Accuracy:  0.988
+
+zh
+   Precision: 0.175
+   Recall:    0.375
+   Accuracy:  0.995
+
+eh
+   Precision: 0.425
+   Recall:    0.328
+   Accuracy:  0.971
+
+ix
+   Precision: 0.457
+   Recall:    0.319
+   Accuracy:  0.964
+
+ah
+   Precision: 0.292
+   Recall:    0.331
+   Accuracy:  0.976
+
+ao
+   Precision: 0.502
+   Recall:    0.485
+   Accuracy:  0.979
+
+ih
+   Precision: 0.338
+   Recall:    0.242
+   Accuracy:  0.966
+
+tcl
+   Precision: 0.457
+   Recall:    0.272
+   Accuracy:  0.968
+
+en
+   Precision: 0.106
+   Recall:    0.206
+   Accuracy:  0.984
+
+ey
+   Precision: 0.348
+   Recall:    0.54
+   Accuracy:  0.975
+
+aw
+   Precision: 0.158
+   Recall:    0.32
+   Accuracy:  0.987
+
+h#
+   Precision: 0.785
+   Recall:    0.654
+   Accuracy:  0.977
+
+ay
+   Precision: 0.547
+   Recall:    0.481
+   Accuracy:  0.983
+
+ax
+   Precision: 0.341
+   Recall:    0.306
+   Accuracy:  0.975
+
+er
+   Precision: 0.323
+   Recall:    0.401
+   Accuracy:  0.977
+
+pau
+   Precision: 0.151
+   Recall:    0.275
+   Accuracy:  0.981
+
+eng
+   Precision: 0.0
+   Recall:    0.0
+   Accuracy:  0.997
+
+gcl
+   Precision: 0.454
+   Recall:    0.423
+   Accuracy:  0.982
+
+ng
+   Precision: 0.287
+   Recall:    0.435
+   Accuracy:  0.984
+
+nx
+   Precision: 0.135
+   Recall:    0.38
+   Accuracy:  0.988
+
+iy
+   Precision: 0.61
+   Recall:    0.493
+   Accuracy:  0.971
+
+sh
+   Precision: 0.597
+   Recall:    0.574
+   Accuracy:  0.988
+
+th
+   Precision: 0.321
+   Recall:    0.575
+   Accuracy:  0.99
+
+t
+   Precision: 0.656
+   Recall:    0.518
+   Accuracy:  0.985
+
+axr
+   Precision: 0.375
+   Recall:    0.469
+   Accuracy:  0.971
+
+dcl
+   Precision: 0.589
+   Recall:    0.476
+   Accuracy:  0.98
+
+pcl
+   Precision: 0.332
+   Recall:    0.636
+   Accuracy:  0.972
+
+dh
+   Precision: 0.464
+   Recall:    0.348
+   Accuracy:  0.985
+
+kcl
+   Precision: 0.617
+   Recall:    0.486
+   Accuracy:  0.976
+
+v
+   Precision: 0.554
+   Recall:    0.618
+   Accuracy:  0.987
+
+hv
+   Precision: 0.575
+   Recall:    0.724
+   Accuracy:  0.993
+
+y
+   Precision: 0.436
+   Recall:    0.593
+   Accuracy:  0.986
+
+hh
+   Precision: 0.457
+   Recall:    0.552
+   Accuracy:  0.991
+
+jh
+   Precision: 0.335
+   Recall:    0.363
+   Accuracy:  0.989
+
+dx
+   Precision: 0.305
+   Recall:    0.358
+   Accuracy:  0.985
+
+ax-h
+   Precision: 0.043
+   Recall:    0.129
+   Accuracy:  0.994
+
+w
+   Precision: 0.647
+   Recall:    0.7
+   Accuracy:  0.987
+
+d
+   Precision: 0.225
+   Recall:    0.233
+   Accuracy:  0.99
+
+bcl
+   Precision: 0.604
+   Recall:    0.606
+   Accuracy:  0.988
+
+b
+   Precision: 0.076
+   Recall:    0.145
+   Accuracy:  0.996
+
+ux
+   Precision: 0.377
+   Recall:    0.53
+   Accuracy:  0.982
+
+g
+   Precision: 0.539
+   Recall:    0.522
+   Accuracy:  0.992
+
+f
+   Precision: 0.809
+   Recall:    0.802
+   Accuracy:  0.993
+
+k
+   Precision: 0.787
+   Recall:    0.65
+   Accuracy:  0.987
+
+m
+   Precision: 0.631
+   Recall:    0.452
+   Accuracy:  0.98
+
+l
+   Precision: 0.659
+   Recall:    0.296
+   Accuracy:  0.971
+
+n
+   Precision: 0.622
+   Recall:    0.247
+   Accuracy:  0.97
+
+q
+   Precision: 0.647
+   Recall:    0.617
+   Accuracy:  0.985
+
+p
+   Precision: 0.557
+   Recall:    0.523
+   Accuracy:  0.988
+
+s
+   Precision: 0.789
+   Recall:    0.779
+   Accuracy:  0.985
+
+r
+   Precision: 0.618
+   Recall:    0.48
+   Accuracy:  0.972
+
+uh
+   Precision: 0.091
+   Recall:    0.239
+   Accuracy:  0.984
+
+oy
+   Precision: 0.229
+   Recall:    0.461
+   Accuracy:  0.986
+
+epi
+   Precision: 0.4
+   Recall:    0.435
+   Accuracy:  0.988
+
+ow
+   Precision: 0.307
+   Recall:    0.23
+   Accuracy:  0.977
+
+ae
+   Precision: 0.621
+   Recall:    0.635
+   Accuracy:  0.983
+
+z
+   Precision: 0.68
+   Recall:    0.612
+   Accuracy:  0.985
+
+uw
+   Precision: 0.207
+   Recall:    0.472
+   Accuracy:  0.99
+
