@@ -165,12 +165,12 @@ def testGMMs(phones, testPath, models, X_train):
         X_test = {}
         featureExtract(phones, f, X_test) #get features of a test audio file and sort them by phone into Xtest dictionary
         preds =[]
-        for key,val in X_test.items(): #key is the phone label and val is an array of extracted feature vectors 
-            if val != []:
+        for key,vals in X_test.items(): #key is the phone label and val is an array of extracted feature vectors 
+            for val in vals:
                 logprobs = dict((p, []) for p in phones) 
                 for phone in mKeys:#test each model with the observations
                     gmm = models[phone] 
-                    scores = numpy.asarray(gmm.score(val)) #array of logprob of each feature vector in array of vectors
+                    scores = numpy.asarray(gmm.score([val])) #array of logprob of each feature vector in array of vectors
                     logprobs[phone]= numpy.sum(scores) #logprob of that phone given all the observations
                 prediction = max(logprobs.items(), key=operator.itemgetter(1))[0] #phone is model that yields highest logpro from the observations
                 if prediction == key:
