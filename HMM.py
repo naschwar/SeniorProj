@@ -21,7 +21,6 @@ class HMM(object):
 
     def train(self, sampPerWin): 
         path = self.dataPath + "TRAIN"
-        B = numpy.zeros((61,61)) 
         files = ASR.getFiles(path)
         total =0
         for name in files:
@@ -35,26 +34,23 @@ class HMM(object):
                 self_tran = (int(fromVals[1])- int(fromVals[0]))/sampPerWin #find the number of transitions the phone makes back onto itself
                 fromPhone = fromVals[2]
                 toPhone = toVals[2]
-                if (toPhone in self.phones) and (fromPhone in self.phones):
+                if ((toPhone in self.phones.keys()) and (fromPhone in self.phones.keys())):
                     total += (1 + self_tran)
-                    fromI = self.phones.index(fromPhone) #index into transition matrix corresponds to index into phones array
-                    toI = self.phones.index(toPhone) 
-                    B[fromI][toI] +=1
-                    B[fromI][fromI] += self_tran
-        for i in range(61):
-            for j in range(61):
-                B[i][j]= ((B[i][j] + 1)/total)*100 #turn counts  into probabilities
-        return B
+                    fromI = self.phones[fromPhone] #index into transition matrix corresponds to index into phones array
+                    toI = self.phones[toPhone] 
+                    self.transitions[fromI][toI] +=1
+                    self.transitions[fromI][fromI] += self_tran
+        self.transitions = (self.transitions + 1)/total
 
     def decode(self, observations):
     #this function implements the viterbi algorithm to decode the path of phone states
         pathLen = len(observations) 
-        path_probs = numpy.zeros((len(self.phones), pathLen)) 
-        paths = {key: [] for key in self.phones} 
+        path_probs = numpy.zeros((len(self.phones.keys()), pathLen)) 
+        paths = {key: [] for key in self.phones.keys()} 
         for t in range(pathLen):
             obs = [observations[t]] 
             i =0
-            for phn in self.phones: 
+            for phn in self.phones.keys(): 
                 emission = self.models[phn].score(obs) 
                 if(t == 0): 
                     path_probs[i,0] = emission 
@@ -62,15 +58,15 @@ class HMM(object):
                     transitions = numpy.add(numpy.log(self.transitions[:,i]), path_probs[:,t-1]) 
                     max = numpy.argmax(transitions) 
                     if(paths[phn] == []):
-                        paths[phn]=[self.phones[max]]
+                        paths[phn]=[self.phones.keys()[max]]
                     else:
-                        paths[phn].append(self.phones[max]) 
+                        paths[phn].append(self.phones.keys()[max]) 
                     path_probs[i, t] = emission+transitions[max] 
                 i +=1
-        for phn in self.phones:
+        for phn in self.phones.keys():
             paths[phn].append(phn)
         pred = numpy.argmax(path_probs[:,-1]) 
-        final = self.phones[pred] 
+        final = self.phones.keys()[pred] 
         path = paths[final] 
         return path
 
@@ -81,23 +77,23 @@ class HMM(object):
         testFiles = ASR.getFiles(testPath)
         fp = open("paths.txt", "w")
         mfcc_feat =[]
-        trueP = {key: 0 for key in self.phones} #increment a phone's trueP score when HMM predicts that phone correctly
-        trueN = {key: 0 for key in self.phones} #increment a phone's trueP when HMM correctly did not predict the phone from the observation
-        falseP ={key: 0 for key in self.phones} #increment a phone's falseP when HMM predicts that phone, but actually was a different phone
-        falseN = {key: 0 for key in self.phones} #increment a phone's falseN when HMM predicts a different phone, but actually was this phone
+        trueP = {key: 0 for key in self.phones.keys()} #increment a phone's trueP score when HMM predicts that phone correctly
+        trueN = {key: 0 for key in self.phones.keys()} #increment a phone's trueP when HMM correctly did not predict the phone from the observation
+        falseP ={key: 0 for key in self.phones.keys()} #increment a phone's falseP when HMM predicts that phone, but actually was a different phone
+        falseN = {key: 0 for key in self.phones.keys()} #increment a phone's falseN when HMM predicts a different phone, but actually was this phone
         for f in testFiles:
             obs ={}
             phnFile = f + '.phn'
             lengths = []
-            mfcc_feat = ASR.featureExtract(self.phones, f, obs, lengths)
+            mfcc_feat = ASR.featureExtract(self.phones.keys(), f, obs, lengths)
             path = self.decode(mfcc_feat)#get predicted sequence
             fp.write("\nPredicted Path:\n")
             fp.write(str(path))
-            correctPath = ASR.getPath(phnFile, self.phones, lengths)#get correct sequence
+            correctPath = ASR.getPath(phnFile, self.phones.keys(), lengths)#get correct sequence
             fp.write("\nCorrect Path:\n")
             fp.write(str(correctPath))
             fp.write("\n")
-            ASR.compareResults(correctPath, path, self.phones, trueP, falseP, falseN, trueN)
+            ASR.compareResults(correctPath, path, self.phones.keys(), trueP, falseP, falseN, trueN)
         fp.close()
         ASR.get_PrecisionRecall(trueP, falseP, falseN, trueN, 1)#get precision and recall for each state after testing is complete
         return 

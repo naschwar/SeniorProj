@@ -14,7 +14,7 @@ class GMMs():
         files = ASR.getFiles(trainPath)
         features ={}
         for name in files:
-            ASR.featureExtract(self.phones, name, features)
+            ASR.featureExtract(self.phones.keys(), name, features)
         for phone, obs in features.items():
             gmm = mixture.GaussianMixture(n_components=3, covariance_type='full', max_iter = 100)
             gmm.fit(obs)
@@ -27,18 +27,18 @@ class GMMs():
         testFiles = ASR.getFiles(testPath)
         num =0
         denom =0
-        trueP = {key: 0 for key in self.phones} #increment a phone's trueP score when GMM predicts that phone correctly
-        falseP ={key: 0 for key in self.phones} #increment a phone's falseP when GMM predicts that phone, but actually was a different phone
-        falseN = {key: 0 for key in self.phones} #increment a phone's falseN when GMM predicts a different phone, but actually was this phone
-        trueN = {key: 0 for key in self.phones} #increment a phone's trueP when GMM correctly did not predict the phone from the observation
+        trueP = {key: 0 for key in self.phones.keys()} #increment a phone's trueP score when GMM predicts that phone correctly
+        falseP ={key: 0 for key in self.phones.keys()} #increment a phone's falseP when GMM predicts that phone, but actually was a different phone
+        falseN = {key: 0 for key in self.phones.keys()} #increment a phone's falseN when GMM predicts a different phone, but actually was this phone
+        trueN = {key: 0 for key in self.phones.keys()} #increment a phone's trueP when GMM correctly did not predict the phone from the observation
         mKeys = self.models.keys()
         for f in testFiles:
             X_test = {}
-            ASR.featureExtract(self.phones, f, X_test) #get features of a test audio file and sort them by phone into Xtest dictionary
+            ASR.featureExtract(self.phones.keys(), f, X_test) #get features of a test audio file and sort them by phone into Xtest dictionary
             preds =[]
             for key,vals in X_test.items(): #key is the phone label and val is an array of extracted feature vectors 
                 for val in vals:
-                    logprobs = dict((p, []) for p in self.phones) 
+                    logprobs = dict((p, []) for p in self.phones.keys()) 
                     for phone in mKeys:#test each model with the observations
                         gmm = self.models[phone] 
                         scores = numpy.asarray(gmm.score([val])) #array of logprob of each feature vector in array of vectors
@@ -50,8 +50,8 @@ class GMMs():
                     else:
                         falseP[prediction] +=1
                         falseN[key] +=1
-                    for i in range(len(self.phones)):
-                        phn = self.phones[i] 
+                    for i in range(len(self.phones.keys())):
+                        phn = self.phones.keys()[i] 
                         if((phn != prediction) & (phn != key)):
                             trueN[phn] +=1
                     denom +=1
